@@ -1,0 +1,824 @@
+/* =========================
+   ページ全体
+========================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background-image:
+        linear-gradient(
+            rgba(248, 245, 233, 0.25),
+            rgba(248, 245, 233, 0.25)
+        ),
+        url("../img/greenbackground.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: calc(100vh - 52px);
+}
+
+.content {
+    margin: 25px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* タイトル */
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 20px;
+
+    color: rgb(104, 75, 39);
+    font-size: 48px;
+    font-weight: bold;
+}
+
+/* サブタイトル */
+.subtitle {
+    margin-bottom: 35px;
+
+    color: rgb(125, 98, 63);
+
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.page-title-home{
+    font-size:28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   ヘッダー
+========================= */
+
+.auction-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    background: rgb(171, 141, 98);
+}
+
+.auction-header-title {
+    padding-left: 32px;
+}
+
+.auction-header-title a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#menu-button {
+    width: 64px;
+    height: 52px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: rgb(140, 110, 72);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#menu-button:hover {
+    background: rgb(120, 92, 60);
+}
+
+
+/* =========================
+   サイドメニュー
+========================= */
+
+#actions-sidebar {
+    position: fixed;
+    top: 52px;
+    right: 0;
+    bottom: 0;
+    width: 260px;
+    padding: 20px;
+    background: rgb(245, 236, 205);
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#actions-sidebar .side-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#actions-sidebar .side-nav li {
+    margin-bottom: 22px;
+}
+
+#actions-sidebar .heading {
+    color: rgb(104, 75, 39);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   見出し・リンク
+========================= */
+
+h1,
+h2,
+h3 {
+    color: rgb(104, 75, 39);
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: rgb(104, 75, 39);
+}
+
+a:hover {
+    color: rgb(78, 55, 30);
+}
+
+
+/* =========================
+   テーブル
+========================= */
+
+table {
+    width: 100%;
+    background: #fffdf6;
+    border: 2px solid #d8c79b;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 22px;
+    overflow: hidden;
+}
+
+table th {
+    padding: 14px 18px;
+    background: rgb(212, 180, 131);
+    color: rgb(90, 66, 38);
+    border-bottom: 3px solid rgb(197, 158, 105);
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+table th.main {
+    width: 48%;
+    padding-left: 24px;
+    text-align: left;
+}
+
+table th.small {
+    width: 17%;
+}
+
+table th a {
+    color: rgb(90, 66, 38);
+    text-decoration: none;
+}
+
+table th a:hover {
+    color: rgb(122, 87, 48);
+}
+
+table td {
+    padding: 13px 18px;
+    vertical-align: middle;
+}
+
+table tbody tr:nth-child(even) {
+    background: rgba(245, 236, 205, 0.35);
+}
+
+.status-cell,
+td.actions {
+    text-align: center;
+}
+
+
+/* =========================
+   通常ボタン
+========================= */
+
+.button {
+    background: rgb(171, 141, 98);
+    color: white;
+    border-radius: 30px;
+}
+
+.button:hover {
+    background: rgb(150, 122, 82);
+}
+
+
+/* =========================
+   商品を見るボタン
+========================= */
+
+.view-button {
+    display: inline-block;
+    padding: 7px 15px;
+    background: rgb(171, 141, 98);
+    color: white;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.view-button:hover {
+    background: rgb(147, 116, 76);
+    color: white;
+}
+
+
+/* =========================
+   たぬきち
+========================= */
+
+.tanukichi-area {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    text-align: center;
+}
+
+.tanukichi-image {
+    display: block;
+    width: 150px;
+    max-width: 100%;
+    margin: 15px auto 0;
+}
+
+.tanukichi-speech {
+    position: relative;
+    display: inline-block;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 16px;
+    color: rgb(104, 75, 39);
+    font-size: 14px;
+}
+
+.tanukichi-speech::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: white;
+}
+
+
+/* =========================
+   マイページ名前編集
+========================= */
+
+.username-edit-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.username-edit-area .input {
+    flex: 1;
+    margin: 0;
+}
+
+.username-edit-area input,
+.username-edit-area button {
+    margin: 0;
+}
+
+.username-edit-area button {
+    white-space: nowrap;
+}
+
+
+/* =========================
+   削除ボタン
+========================= */
+
+.delete-form {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+button.delete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 0;
+    padding: 6px 14px;
+    background: #e74c3c;
+    color: white;
+    border: 0;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+button.delete-button:hover {
+    background: #c0392b;
+}
+
+/* 出品フォーム */
+.item-form {
+    max-width: 900px;
+}
+
+.form-card {
+    padding: 28px;
+    background: rgba(255, 253, 246, 0.96);
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 24px;
+    box-shadow: 0 8px 18px rgba(104, 75, 39, 0.12);
+}
+
+.seller-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    background: rgb(245, 236, 205);
+    border-radius: 18px;
+    color: rgb(104, 75, 39);
+}
+
+.seller-label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.seller-name {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgb(104, 75, 39);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.item-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 14px;
+    background: white;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.item-input:focus {
+    border-color: rgb(171, 141, 98);
+    outline: none;
+}
+
+.endtime-input select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 14px;
+    background: white;
+    color: rgb(104, 75, 39);
+}
+
+.form-actions {
+    margin-top: 24px;
+}
+
+.submit-item-button {
+    padding: 12px 28px;
+    background: rgb(171, 141, 98);
+    color: white;
+    border: 0;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-item-button:hover {
+    background: rgb(147, 116, 76);
+}
+
+/*落札数*/
+.item-count{
+    width: fit-content;      
+    margin: 0 0 12px auto;  
+    padding: 6px 12px;
+
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(104,75,39);
+
+    border: 2px solid rgb(216,199,155);
+    border-radius: 999px;
+    background: rgba(255,255,255,.6);
+}
+
+.profile-table th {
+    width: 25%;
+    color: rgb(104, 75, 39);
+    text-align: left;
+}
+
+.profile-table td {
+    width: 75%;
+}
+
+.profile-table input {
+    width: 100%;
+    margin: 0;
+    padding: 10px 14px;
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 14px;
+    box-sizing: border-box;
+}
+
+.profile-table input:disabled {
+    background: rgb(248, 245, 233);
+    color: rgb(104, 75, 39);
+    opacity: 1;
+}
+
+.profile-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.profile-buttons .button {
+    width: auto;
+    margin: 0;
+    padding: 9px 20px;
+    border: 0;
+    cursor: pointer;
+}
+
+.profile-buttons .button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.mypage-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.mypage-links p {
+    margin: 0;
+}
+
+.logout-link {
+    display: inline-block;
+    padding: 7px 15px;
+    color: rgb(150, 75, 65);
+    border: 2px solid rgb(200, 150, 140);
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    background: rgb(250, 235, 230);
+    color: rgb(125, 55, 48);
+}
+
+/* =========================
+   商品一覧テーブル
+========================= */
+
+.auction-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* 商品 */
+.auction-table th:nth-child(1),
+.auction-table td:nth-child(1) {
+    width: 37% !important;
+}
+
+/* 状態 */
+.auction-table th:nth-child(2),
+.auction-table td:nth-child(2) {
+    width: 14% !important;
+}
+
+/* 終了日時 */
+.auction-table th:nth-child(3),
+.auction-table td:nth-child(3) {
+    width: 20% !important;
+    white-space: nowrap;
+}
+
+/* お気に入り */
+.auction-table th:nth-child(4),
+.auction-table td:nth-child(4) {
+    width: 11% !important;
+    padding-right: 6px;
+    padding-left: 6px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 詳細 */
+.auction-table th:nth-child(5),
+.auction-table td:nth-child(5) {
+    width: 18% !important;
+    padding-right: 8px;
+    padding-left: 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 星 */
+.auction-table .favorite-button {
+    display: inline-block;
+    font-size: 25px;
+    color: #f7c400;
+    text-decoration: none;
+    line-height: 1;
+    font-family:
+    "Yu Gothic UI", "Meiryo", sans-serif;
+    text-shadow:
+        0 1px 0 #ffe98a,
+        0 0 6px rgba(255, 214, 0, 0.35);
+    transition: transform .15s ease;
+}
+
+.auction-table .favorite-button:hover {
+    color: #ffd84d !important;
+    transform: scale(1.15);
+}
+
+/* 商品を見る */
+.auction-table .view-button {
+    display: inline-block;
+    min-width: 105px;
+    margin: 0;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    white-space: nowrap !important;
+    word-break: keep-all;
+    writing-mode: horizontal-tb;
+    text-align: center;
+}
+
+/* =========================
+   商品検索
+========================= */
+
+/* 検索エリア全体 */
+.search-area {
+    width: 100%;
+    margin: 28px 0 34px;
+}
+
+/* フォーム */
+.search-area form.search-form {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    margin: 0;
+}
+
+/* 入力欄を囲む外枠 */
+.search-input-wrap {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    padding: 7px 12px;
+
+    background: rgba(255, 253, 246, 0.96);
+    border: 2px dashed #8ebd73;
+    border-radius: 17px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 3px 0 rgba(95, 139, 75, 0.16),
+        inset 0 0 0 4px rgba(255, 255, 255, 0.7);
+}
+
+/* 入力欄左側の葉っぱ */
+.search-leaf {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+    margin-right: 9px;
+
+    background: #e6f3d7;
+    border-radius: 50%;
+
+    font-size: 21px;
+    line-height: 1;
+}
+
+/* CakePHPが自動生成する囲み */
+.search-input-wrap .input,
+.search-input-wrap .text {
+    flex: 1;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 入力欄 */
+.search-input-wrap input.search-input {
+    display: block;
+    width: 100% !important;
+    height: 46px;
+    margin: 0 !important;
+    padding: 9px 15px !important;
+
+    color: rgb(104, 75, 39);
+    background: #fffaf0 !important;
+
+    border: 1px solid #eadfc9 !important;
+    border-radius: 12px !important;
+    outline: none;
+
+    box-sizing: border-box;
+
+    font-size: 16px;
+
+    box-shadow:
+        inset 0 2px 4px rgba(104, 75, 39, 0.08) !important;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+/* プレースホルダー */
+.search-input-wrap input.search-input::placeholder {
+    color: #b8ad9d;
+}
+
+/* 入力時 */
+.search-input-wrap input.search-input:focus {
+    background: #ffffff !important;
+    border-color: #83bb67 !important;
+
+    box-shadow:
+        0 0 0 4px rgba(131, 187, 103, 0.2),
+        inset 0 2px 4px rgba(104, 75, 39, 0.05) !important;
+}
+
+/* 検索ボタン */
+.search-area button.search-button {
+    position: relative;
+    top: 10px;
+
+    min-width: 170px;
+    height: 56px;
+
+    padding: 0 58px 0 30px;
+
+    background: linear-gradient(
+        180deg,
+        #86c66f,
+        #6cb15a
+    );
+
+    color: white;
+    border: none;
+    border-radius: 14px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    /* 影をかなり弱く */
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.12);
+
+    transition: .15s;
+}
+
+.search-area button.search-button:hover{
+    box-shadow:
+        0 4px 8px rgba(0,0,0,.15);
+}
+
+/* 右側の虫眼鏡 */
+.search-area button.search-button::after {
+    content: "🔎";
+
+    position: absolute;
+    top: 50%;
+    right: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    background: #fff9df;
+    border: 3px solid #efc875;
+    border-radius: 50%;
+
+    box-sizing: border-box;
+
+    font-size: 18px;
+
+    box-shadow:
+        0 3px 0 rgba(125, 91, 38, 0.18);
+
+    transform:
+        translateY(-50%)
+        rotate(-10deg);
+}
+
+
+/* 押したとき */
+.search-area button.search-button:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.15);
+}
+
+/* キーボード操作時 */
+.search-area button.search-button:focus {
+    outline: none;
+
+    box-shadow:
+        0 5px 0 #4e8b3f,
+        0 0 0 5px rgba(131, 197, 109, 0.26) !important;
+}
+
+/* スマホ表示 */
+@media screen and (max-width: 700px) {
+    .search-area form.search-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .search-area button.search-button {
+        justify-content: center;
+        width: 100%;
+        padding-right: 62px !important;
+    }
+}
