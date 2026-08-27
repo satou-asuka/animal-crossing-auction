@@ -12,6 +12,11 @@
 <?= $this->Html->meta('icon') ?>
 
 <?= $this->Html->css('base.css') ?>
+<?= $this->Html->css('common.css') ?>
+<?= $this->Html->css('header.css') ?>
+<?= $this->Html->css('home.css') ?>
+<?= $this->Html->css('forms.css') ?>
+<?= $this->Html->css('mypage.css') ?>
 <?= $this->Html->css('auction.css') ?>
 
 <?= $this->fetch('meta') ?>
@@ -22,6 +27,32 @@
 
 <body>
 
+<?php
+$controller = $this->request->getParam('controller');
+$action = $this->request->getParam('action');
+
+//デフォルト
+$bgm = 'トップページ.mp3';
+
+if($controller === 'Auction' && 
+    in_array($action, ['index', 'view', 'favorites'])){
+    $bgm = 'トップページ.mp3';
+}elseif ($controller === 'Auction' && 
+    in_array($action, ['home', 'home2', 'add', 'edit', 'bid'])){
+    $bgm = '出品＆落札.mp3';
+}else{
+    $bgm = 'マイページ.mp3';
+
+}
+?>
+
+<audio id="bgm" loop>
+    <source
+        src="<?= $this->Url->build('/audio/' . $bgm) ?>"
+        type="audio/mpeg"
+    >
+</audio>
+
 <header class="auction-header">
 
     <div class="auction-header-title">
@@ -31,14 +62,24 @@
         ) ?>
     </div>
 
-    <button
-        type="button"
-        id="menu-button"
-        onclick="toggleMenu()"
-        aria-label="メニューを開閉する"
-    >
-        ☰
-    </button>
+    <div class="header-buttons">
+        <button
+            type="button"
+            id="bgm-button"
+            aria-label="BGMを切り替える"
+        >
+            BGM <span id="bgm-status">●</span>
+        </button>
+
+        <button
+            type="button"
+            id="menu-button"
+            onclick="toggleMenu()"
+            aria-label="メニューを開閉する"
+        >
+            ☰
+        </button>
+</div>
 
 </header>
 
@@ -72,6 +113,13 @@
                 <?= $this->Html->link(
                     __('商品リストを見る'),
                     ['action' => 'index']
+                ) ?>
+            </li>
+
+            <li>
+                <?= $this->Html->link(
+                    __('あなたの入札情報'),
+                    ['action' => 'bidding']
                 ) ?>
             </li>
 
@@ -134,6 +182,75 @@ function toggleMenu() {
     }
 }
 
+/* =========================
+   BGM
+========================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const bgm = document.getElementById('bgm');
+    const bgmButton = document.getElementById('bgm-button');
+    const bgmStatus = document.getElementById('bgm-status');
+
+    const currentBgm = bgm.querySelector('source').src;
+
+    const bgmEnabled = localStorage.getItem('bgmEnabled');
+    const savedBgm = localStorage.getItem('bgmFile');
+    const savedTime = parseFloat(localStorage.getItem('bgmTime')) || 0;
+
+     bgm.addEventListener('loadedmetadata', function () {
+
+        if (savedBgm === currentBgm) {
+            bgm.currentTime = savedTime;
+        } else {
+            bgm.currentTime = 0;
+        }
+
+        localStorage.setItem('bgmFile', currentBgm);
+
+        if (bgmEnabled === 'true') {
+
+            bgm.play()
+                .then(function () {
+                    bgmStatus.className = 'playing';
+                })
+                .catch(function () {
+                    bgmStatus.className = 'stopped';
+                });
+
+        } else {
+            bgmStatus.className = 'stopped';
+        }
+    });
+
+
+    // 再生中の時間を保存
+    bgm.addEventListener('timeupdate', function () {
+        localStorage.setItem('bgmTime', bgm.currentTime);
+        localStorage.setItem('bgmFile', currentBgm);
+    });
+
+
+    // BGMボタン
+    bgmButton.addEventListener('click', function () {
+
+        if (bgm.paused) {
+
+            bgm.play();
+
+            localStorage.setItem('bgmEnabled', 'true');
+            bgmStatus.className = 'playing';
+
+        } else {
+
+            bgm.pause();
+
+            localStorage.setItem('bgmEnabled', 'false');
+            bgmStatus.className = 'stopped';
+        }
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const speech = document.getElementById('tanukichi-speech');
 
@@ -150,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
             '今日もいい朝だなも！',
             '早起きは三文の得だなも！',
         ];
-    } else if (hour < 18) {
+    } else if (hour < 17) {
         messages = [
             'こんにちはだなも！',
             'お昼のぽかぽか陽気だなも！',
@@ -167,6 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const randomIndex = Math.floor(Math.random() * messages.length);
     speech.textContent = messages[randomIndex];
 });
+
 </script>
 </body>
 </html>

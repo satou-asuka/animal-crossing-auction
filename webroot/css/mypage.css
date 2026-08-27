@@ -1,0 +1,117 @@
+/* =========================
+   マイページ
+========================= */
+.mypage-content {
+    width: 90%;
+    box-sizing: border-box;
+}
+
+.profile-table th,
+.profile-table td {
+    height: 64px;
+    vertical-align: middle;
+}
+
+/* =========================
+   名前編集
+========================= */
+
+.username-edit-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.username-edit-area .input {
+    flex: 1;
+    margin: 0;
+}
+
+.username-edit-area input,
+.username-edit-area button {
+    margin: 0;
+}
+
+.username-edit-area button {
+    white-space: nowrap;
+}
+
+
+/* =========================
+   落札数
+========================= */
+
+.item-count {
+    width: fit-content;
+    margin: 0 0 12px auto;
+    padding: 6px 12px;
+
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(104,75,39);
+
+    border: 2px solid rgb(216,199,155);
+    border-radius: 999px;
+    background: rgba(255,255,255,.6);
+}
+
+
+
+
+/* =========================
+   プロフィールボタン
+========================= */
+
+.profile-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.profile-buttons .button {
+    width: auto;
+    margin: 0;
+    padding: 9px 20px;
+    border: 0;
+    cursor: pointer;
+}
+
+.profile-buttons .button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   マイページリンク
+========================= */
+
+.mypage-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.mypage-links p {
+    margin: 0;
+}
+
+
+/* =========================
+   ログアウト
+========================= */
+
+.logout-link {
+    display: inline-block;
+    padding: 7px 15px;
+    color: rgb(150, 75, 65);
+    border: 2px solid rgb(200, 150, 140);
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    background: rgb(250, 235, 230);
+    color: rgb(125, 55, 48);
+}

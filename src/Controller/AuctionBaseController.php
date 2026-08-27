@@ -25,29 +25,40 @@ class AuctionBaseController extends AppController
                 ]
             ],
             'loginRedirect' => [
-                'controller' => 'Users',
+                'controller' => 'Auction',
+                'action' => 'index'
+            ],
+
+                'loginAction' => [
+                'controller' => 'Auction',
                 'action' => 'login'
             ],
+
             'logoutRedirect' => [
-                'controller' => 'Users',
-                'action' => 'logout',
+                'controller' => 'Auction',
+                'action' => 'login',
             ],
             'authError' => 'ログインしてください。',
         ]);
     }
 
     // ログイン処理
-    function login(){
+    public function login()
+    {
+        // ログイン画面だけCakePHPのデフォルトレイアウトを使う
+        $this->viewBuilder()->setLayout('default');
+
         // POST時の処理
-        if($this->request->isPost()) {
+        if ($this->request->isPost()) {
             $user = $this->Auth->identify();
-            // Authのidentifyをユーザーに設定
-            if(!empty($user)){
+
+            if (!empty($user)) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
+
             $this->Flash->error('ユーザー名かパスワードが間違っています。');
-                }
+        }
     }
 
     // ログアウト処理

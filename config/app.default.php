@@ -5,7 +5,7 @@ use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
-use Cake\Mailer\Transport\MailTransport;
+use Cake\Mailer\Transport\SmtpTransport;
 
 return [
     /**
@@ -203,12 +203,13 @@ return [
      * appropriate file to src/Mailer/Transport. Transports should be named
      * 'YourTransport.php', where 'Your' is the name of the transport.
      */
+
     'EmailTransport' => [
         'default' => [
-            'className' => MailTransport::class,
+            'className' => SmtpTransport::class,
             /*
-             * The following keys are used in SMTP transports:
-             */
+            * The following keys are used in SMTP transports:
+            */
             'host' => 'localhost',
             'port' => 25,
             'timeout' => 30,

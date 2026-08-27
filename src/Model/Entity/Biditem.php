@@ -29,6 +29,8 @@ class Biditem extends Entity
      * @var array
      */
     protected $_accessible = [
+        'minimum_price' => true, 
+        'image' => true,         
         'user_id' => true,
         'name' => true,
         'finished' => true,
@@ -37,5 +39,6 @@ class Biditem extends Entity
         'user' => true,
         'bidinfo' => true,
         'bidrequests' => true,
+        'category' => true
     ];
 }

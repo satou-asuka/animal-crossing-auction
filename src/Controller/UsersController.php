@@ -36,7 +36,7 @@ class UsersController extends AppController
         ],
         'logoutRedirect' => [
             'controller' => 'Users',
-            'action' => 'logout',
+            'action' => 'login',
         ],
     'authError' => 'ログインしてください。',
     ]);
@@ -51,9 +51,17 @@ public function login()
         if ($user) {
             $this->Auth->setUser($user);
 
+            if ($user['role'] === 'admin') {
+                return $this->redirect([
+                    'controller' =>'Users',
+                    'action' => 'index'
+                ]);
+            }
+
             return $this->redirect([
-                'controller' => 'Users',
+                'controller' => 'Auction',
                 'action' => 'index',
+                $user['id']
             ]);
         }
 
@@ -61,17 +69,16 @@ public function login()
     }
 }
 
-// ログアウト処理
-public function logout() {
-    // セッションを破棄
-    $this->request->session()->destroy();
+//ログアウト処理
+public function logout()
+{
     return $this->redirect($this->Auth->logout());
 }
 
 // 認証を使わないページの設定
 public function beforeFilter(Event $event) {
     parent::beforeFilter($event);
-    $this->Auth->allow(['login']); // 後で'add'を削除する
+    $this->Auth->allow(['login', 'logout']); 
 }
 
 // 認証時のロールのチェック

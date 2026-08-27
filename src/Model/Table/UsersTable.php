@@ -86,6 +86,19 @@ class UsersTable extends Table
             ->requirePresence('role', 'create')
             ->notEmptyString('role');
 
+        $validator
+        ->email(
+            'email',
+            false,
+            '正しいメールアドレスを入力してください。'
+        );
+
+        $validator
+        ->add('phone', 'validFormat', [
+            'rule' => ['custom', '/^[0-9\-]+$/'],
+            'message' => '電話番号は半角数字とハイフンで入力してください。'
+        ]);
+
         return $validator;
     }
 

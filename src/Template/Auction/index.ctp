@@ -9,40 +9,72 @@
         'class' => 'search-form'
     ]) ?>
 
-    <div class="search-input-wrap">
-        <span class="search-leaf">🍃</span>
+    <!-- 1段目 -->
+    <div class="search-row-top">
 
-        <?= $this->Form->control('keyword', [
-            'label' => false,
-            'value' => $keyword,
-            'placeholder' => '商品名を入力してください',
-            'class' => 'search-input',
-            'templates' => [
-                'inputContainer' => '{{content}}'
-            ]
-        ]) ?>
+        <div class="search-input-wrap">
+            <span class="search-leaf">🍃</span>
+
+            <?= $this->Form->control('keyword', [
+                'label' => false,
+                'value' => $keyword,
+                'placeholder' => '商品名を入力してください',
+                'class' => 'search-input',
+                'templates' => [
+                    'inputContainer' => '{{content}}'
+                ]
+            ]) ?>
+        </div>
+
     </div>
 
-    <div class="sort-area">
-        <label for="sort">並び替え</label>
+    <!-- 2段目 -->
+    <div class="search-row-bottom">
 
-        <?= $this->Form->select('sort', [
-            "newest" => "新しい順",
-            "oldest" => "古い順",
-            "endtime_asc" => "終了が近い順",
-            "endtime_desc" => "終了が遠い順"
-        ],[
-            "id" => "sort",
-            "value" => $sort,
-            "class" => "sort-select",
-            "empty" => false
-        ]) ?>
+        <div class="category-area">
+            <label for="category">カテゴリ</label>
+            <?= $this->Form->select('category', [
+                '料理' => '料理',
+                '魚' => '魚',
+                '虫' => '虫',
+                '海の幸' => '海の幸',
+                '家具' => '家具',
+                '服' => '服',
+                '素材' => '素材',
+                '道具' => '道具'
+            ], [
+                'id' => 'category',
+                'value' => $this->request->getQuery('category'),
+                'class' => 'sort-select',
+                'empty' => 'すべて'
+            ])?>
     </div>
 
-    <?= $this->Form->button('さがす', [
-        'type' => 'submit',
-        'class' => 'search-button'
-    ]) ?>
+        <div class="sort-area">
+            <label for="sort">並び替え</label>
+
+            <?= $this->Form->select('sort', [
+                'newest' => '新しい順',
+                'oldest' => '古い順',
+                'endtime_asc' => '終了が近い順',
+                'endtime_desc' => '終了が遠い順',
+                'price_asc' => '価格が安い順',
+                'price_desc' => '価格が高い順',
+                'bid_count_desc' => '入札数が多い順'
+            ], [
+                'id' => 'sort',
+                'value' => $sort,
+                'class' => 'sort-select',
+                'empty' => false
+            ]) ?>
+        </div>
+
+        <?= $this->Form->button('さがす', [
+            'type' => 'submit',
+            'class' => 'search-button'
+        ]) ?>
+
+    </div>
 
     <?= $this->Form->end() ?>
 </div>
@@ -63,6 +95,10 @@
         </th>
 
         <th class="small" scope="col">
+            🔔入札数        
+        </th>
+
+        <th class="small" scope="col">
             ⭐ お気に入り
         </th>
  
@@ -79,9 +115,39 @@
             <?= $this->Html->link(
                 h($biditem->name),
                 ['action' => 'view', $biditem->id]
-            ) ?></td>
-        <td><?= h($biditem->finished ? '🌸 終了' : '🍃 出品中' ) ?></td>
-        <td><?= h($biditem->endtime) ?></td>
+            ) ?>
+        </td>
+
+        <td>
+            <?= h($biditem->finished ? '🌸 終了' : '🍃 出品中' ) ?>
+        </td>
+
+        <?php
+        $weekdays = [
+            'Sun' => '日',
+            'Mon' => '月',
+            'Tue' => '火',
+            'Wed' => '水',
+            'Thu' => '木',
+            'Fri' => '金',
+            'Sat' => '土'
+        ];
+
+        $weekday = $weekdays[$biditem->endtime->format('D')];
+        ?>
+
+        <td>
+            <?= h(
+                $biditem->endtime->format('m月d日') .
+                '（' . $weekday . '）' .
+                $biditem->endtime->format('H：i')
+            ) ?>
+        </td>
+        
+        <td class="bid-count">
+            <?= h($biditem->bid_count) ?>件
+        </td>
+
         <td class="favorite">
             <?= $this->Form->postLink(
                 //biditem->idがfavoriteBiditemIdsの配列の中にあるか

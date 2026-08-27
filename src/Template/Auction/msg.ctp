@@ -2,8 +2,7 @@
 
 <h2>商品「<?= $bidinfo->biditem->name ?>」</h2>
 
-<h3>※メッセージ情報</h3>
-<h6>※メッセージを送信する</h6>
+<h5>※メッセージを送信する</h5>
 
 <?= $this->Form->create($bidmsg) ?>
 
@@ -13,7 +12,9 @@
 
 <?= $this->Form->textarea('message', ['rows' => 2]); ?>
 
-<?= $this->Form->button('Submit') ?>
+<?= $this->Form->button('送信する', [
+    'class' => 'message-submit-button'
+]) ?>
 
 <?= $this->Form->end() ?>
 

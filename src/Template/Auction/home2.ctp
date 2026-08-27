@@ -4,13 +4,14 @@
     🍇 出品数 <?= count($biditems) ?>件
 </div>
 
-<table cellpadding="0" cellspacing="0">
+<table  class="exhibit-table" cellpadding="0" cellspacing="0">
 <thead>
     <tr>
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-        <th class="main" scope="col"><?= $this->Paginator->sort('name') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-        <th scope="col" class="actions"><?= __('Actions') ?></th>
+        <th class="main" scope="col"><?= $this->Paginator->sort('name', '商品名') ?></th>
+        <th scope="col">状態</th>
+        <th scope="col">入札件数</th>
+        <th scope="col">メッセージ</th>
     </tr>
 </thead>
 
@@ -19,18 +20,49 @@
     <tr>
         <td><?= h($biditem->id) ?></td>
 
-        <td><?= h($biditem->name) ?></td>
+        <td>
+            <?= $this->Html->link(
+                h($biditem->name),
+                ['action' => 'edit', $biditem->id],
+                ['class' => 'item-name-link']
+            ) ?>
+        </td>
 
-        <td><?= h($biditem->created) ?></td>
-        
-        <td class="actions">
-            <?php if (!empty($biditem->bidinfo)): ?>
-                <?= $this->Html->link(
-                    'メッセージを見る',
-                    ['action' => 'msg', $biditem->bidinfo->id]
-                ) ?>
+        <td>
+            <?php if ($biditem->status_label === '出品中'): ?>
+
+                <span class="status-badge status-selling">
+                    🌱 出品中
+                </span>
+
+            <?php elseif ($biditem->status_label === '落札済み'): ?>
+
+                <span class="status-badge status-sold">
+                    🎉 落札済み
+                </span>
+
             <?php else: ?>
-                メッセージなし
+
+                <span class="status-ended">
+                    終了（落札なし）
+                </span>
+
+            <?php endif; ?>
+        </td>
+
+        <td>
+            <?= h($biditem->bid_count) ?>件
+        </td>
+
+        <td class="actions">
+            <?php if (!empty($biditem->bidinfo) && !empty($biditem->bidinfo->id)): ?>
+                <div class="message-icon-wrapper">
+                    <?= $this->Html->link(
+                        '✉️ メッセージを見る',
+                        ['action' => 'msg', $biditem->bidinfo->id],
+                        ['class' => 'message-icon']
+                    ) ?>
+                </div>
             <?php endif; ?>
         </td>
     </tr>

@@ -1,0 +1,133 @@
+/* =========================
+   ヘッダー
+========================= */
+
+.auction-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    background: rgb(171, 141, 98);
+}
+
+.auction-header-title {
+    padding-left: 32px;
+}
+
+.auction-header-title a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#menu-button {
+    width: 64px;
+    height: 52px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: rgb(140, 110, 72);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#menu-button:hover {
+    background: rgb(120, 92, 60);
+}
+
+
+/* =========================
+   サイドメニュー
+========================= */
+
+#actions-sidebar {
+    position: fixed;
+    top: 52px;
+    right: 0;
+    bottom: 0;
+    width: 260px;
+    padding: 20px;
+    background: rgb(245, 236, 205);
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#actions-sidebar .side-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#actions-sidebar .side-nav li {
+    margin-bottom: 22px;
+}
+
+#actions-sidebar .heading {
+    color: rgb(104, 75, 39);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   ヘッダー右側ボタン
+========================= */
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+}
+
+
+/* =========================
+   BGMボタン
+========================= */
+
+#bgm-button {
+    position: relative;
+    top: 10px;
+
+    min-width: 95px;
+    height: 40px;
+    padding: 0 16px;
+
+    background: #fff8e7;
+    color: #765127;
+
+    border: 2px solid #f1d6a1;
+    border-radius: 22px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    box-shadow: 0 3px 0 #c89f62;
+
+    line-height: 35px;
+}
+
+#bgm-status {
+    margin-left: 6px;
+    margin-bottom: 6px;
+}
+
+/* 再生中 */
+#bgm-status.playing {
+    color: #65b84b;
+    font-size: 25px;
+}
+
+/* 停止中 */
+#bgm-status.stopped {
+    color: #e05a5a;
+    font-size: 25px;
+}
+
+#bgm-button:hover {
+    background: #fffdf5;
+}

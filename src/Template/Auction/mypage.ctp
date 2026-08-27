@@ -1,8 +1,10 @@
 <h3 class="page-title-home"><?= h($user->username) ?> のマイページ</h3>
 
+
+<div class="mypage-content">
 <?= $this->Form->create($user) ?>
 
-<table class="vertical-table">
+<table class="vertical-table profile-table">
     <tr>
         <th>ユーザーID</th>
         <td><?= h($user->id) ?></td>
@@ -61,9 +63,12 @@
         </td>
     </tr>
 
+    <tr>
+        <?php if ($authuser['role'] === 'admin'): ?>
         <th>権限</th>
         <td><?= h($user->role) ?></td>
     </tr>
+    <?php endif; ?>
 </table>
 
 <div class="profile-buttons">
@@ -110,6 +115,7 @@
             ]
         ) ?>
     </p>
+</div>
 </div>
 
 <script>

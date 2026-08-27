@@ -1,0 +1,352 @@
+/* =========================
+   出品・編集フォーム
+========================= */
+
+.item-form .form-card {
+    width: 90%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.form-card {
+    padding: 28px;
+    background: rgba(255, 253, 246, 0.96);
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 24px;
+    box-shadow: 0 8px 18px rgba(104, 75, 39, 0.12);
+}
+
+.seller-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    background: rgb(245, 236, 205);
+    border-radius: 18px;
+    color: rgb(104, 75, 39);
+}
+
+.seller-label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.seller-name {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgb(104, 75, 39);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.item-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 14px;
+    background: white;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.item-input:focus {
+    border-color: rgb(171, 141, 98);
+    outline: none;
+}
+
+.endtime-input select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border: 2px solid rgb(216, 199, 155);
+    border-radius: 14px;
+    background: white;
+    color: rgb(104, 75, 39);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.submit-item-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 160px;
+    height: 54px;
+    padding: 0 28px;
+
+    background: #6faf58;
+    border: none;
+    border-radius: 10px;
+
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 0 #4f8a45;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.submit-item-button:hover {
+    background: #63a34e;
+}
+
+.submit-item-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #4f8a45;
+}
+
+/* =========================
+   終了日時
+========================= */
+
+.endtime-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+
+.endtime-button {
+    height: 46px;
+    padding: 0 22px;
+
+    background: #fffaf0;
+    border: 1px solid #d8cbb5;
+    border-radius: 9999px;
+
+    color: #5f5145;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    box-shadow: none;
+}
+
+/* カーソルを乗せたとき */
+.endtime-button:hover {
+    background: #f7f1e6;
+    border-color: #bfae95;
+}
+
+/* 選択中 */
+.endtime-button.selected {
+    background: #f3e9c7;
+    border-color: #d8c49d;
+    color: #5f5145;
+}
+
+/* 自分で設定したときのカレンダー部分 */
+#custom-endtime-area {
+    margin-top: 12px;
+}
+
+/* カレンダー入力欄 */
+.endtime-input {
+    width: 100%;
+    max-width: 320px;
+
+    padding: 10px 12px;
+
+    background: #fffaf0;
+    border: 1px solid #d8cbb5;
+    border-radius: 8px;
+
+    color: #5f5145;
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+/* カレンダー選択時 */
+.endtime-input:focus {
+    outline: none;
+    border-color: #78b85a;
+}
+
+
+/* =========================
+   画像選択
+========================= */
+
+/* 本物のファイル選択ボタンは隠す */
+.image-file-input {
+    display: none;
+}
+
+.image-upload-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+
+    margin-left: -10px;
+}
+
+/* 代わりに表示するボタン */
+.image-select-button {
+    display: inline-block;
+    padding: 10px 22px;
+
+    background: #fffaf0;
+    border: 5px solid #d8cbb5;
+
+    border-radius: 20px;
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+/* ファイル名 */
+.file-name {
+    color: #7a6a55;
+    font-size: 14px;
+}
+
+.image-group {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.image-group .input.file {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.image-input {
+    margin-left: 0;
+}
+
+
+/* =========================
+   編集画面
+========================= */
+
+/* 更新ボタン */
+.edit-update-area {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.edit-update-button {
+    padding: 12px 45px;
+    border: none;
+
+    /* 少し丸くする */
+    border-radius: 10px;
+
+    /* 緑に変更 */
+    background-color: #6fa85f;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.edit-update-button:hover {
+    /* ホバー時は少し濃い緑 */
+    background-color: #568c49;
+}
+
+
+/* 削除エリア */
+.edit-delete-area {
+    padding-top: 25px;
+    border-top: 1px solid #ddd2bd;
+}
+
+
+/* 削除ボタン */
+.edit-delete-button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 13px;
+
+    border: 2px solid #b85c5c;
+
+    border-radius: 10px;
+
+    color: #a94f4f;
+    background-color: #fffafa;
+
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.edit-delete-button:hover {
+    background-color: #b85c5c;
+    color: white;
+}
+
+/* 各入力項目の間隔 */
+.item-form .form-group {
+    margin-bottom: 22px;
+}
+
+/* ラベルと入力欄の間隔 */
+.item-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* 商品名・カテゴリ・最低価格の共通デザイン */
+.item-form .item-input {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+
+    color: #574c3f;
+    font-size: 16px;
+    font-family: inherit;
+
+    background-color: #fff;
+    border: 1px solid #d7d1c6;
+    border-radius: 6px;
+    box-sizing: border-box;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* カテゴリ欄の文字が見切れないようにする */
+.item-form select.category-select {
+    line-height: normal;
+    cursor: pointer;
+}
+
+/* 入力中・選択中は落ち着いた緑色 */
+.item-form .item-input:focus {
+    outline: none;
+    border-color: #7a9b76;
+    box-shadow: 0 0 0 3px rgba(122, 155, 118, 0.18);
+}
+
