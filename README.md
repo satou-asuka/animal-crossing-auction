@@ -1,51 +1,39 @@
-# CakePHP Application Skeleton
+# あつまれ どうぶつの森 オークション
 
-[![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
+「あつまれ どうぶつの森」の世界観をモチーフにした、オークションWebアプリケーションです。
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 3.x.
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+## 🌱 制作背景
 
-## Installation
+「あつまれ どうぶつの森」の本編にはない機能を考える中で、**住民同士が不要になったアイテムをオークション形式で出品し、自由に売買できたら面白いのではないか**と思い、制作しました。
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+ゲームの世界観を大切にしながら、商品の出品・入札・検索・お気に入り登録など、実際のオークションサイトに近い機能を実装しています。
 
-If Composer is installed globally, run
 
-```bash
-composer create-project --prefer-dist cakephp/app
-```
+## 🛠️ 使用技術
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+| 分類 | 技術 |
+|---|---|
+| 言語 | PHP 7.4 / HTML / CSS / JavaScript |
+| フレームワーク | CakePHP 3.8 |
+| データベース | MySQL 5.7 |
+| 開発環境 | Docker / WSL2 (Ubuntu) |
+| バージョン管理 | Git / GitHub |
+| その他 | phpMyAdmin / Cron |
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
-```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+## 🔗 リンク
 
-```bash
-bin/cake server -p 8765
-```
 
-Then visit `http://localhost:8765` to see the welcome page.
+### 📖 アプリの紹介・機能説明
 
-## Update
+画面キャプチャ動画や各機能の説明、実装時に工夫した点などをまとめています。
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+👉 [紹介サイトを見る](https://satou-asuka.github.io/animal-crossing-auction/)
 
-## Configuration
 
-Read and edit `config/app.php` and setup the `'Datasources'` and any other
-configuration relevant for your application.
+### 💻 ソースコード
 
-## Layout
+アプリケーションのソースコードはこちらから確認できます。
 
-The app skeleton uses a subset of [Foundation](http://foundation.zurb.com/) (v5) CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+👉 [GitHubリポジトリを見る](https://github.com/satou-asuka/animal-crossing-auction)
