@@ -1,107 +1,932 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="あつまれ どうぶつの森をモチーフにしたCakePHP 3製オークションアプリ。出品・検索・入札・落札バッチの実装と技術構成を紹介します。">
-  <meta name="theme-color" content="#F8F5E9">
-  <title>島のオークション | Webアプリ開発ポートフォリオ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>あつ森オークション | 機能紹介</title>
+
+  <!-- デザイン -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- 画面切り替え -->
   <script src="js/main.js" defer></script>
 </head>
+
 <body>
-  <a class="skip-link" href="#main">本文へ移動</a>
-  <header class="site-header">
-    <a class="brand" href="#top"><span class="leaf" aria-hidden="true"></span>島のオークション<span class="brand-note">DEVELOPMENT PORTFOLIO</span></a>
-    <nav aria-label="メインナビゲーション">
-      <a href="#features">機能</a><a href="#screens">画面</a><a href="#technology">技術構成</a><a href="#engineering">実装の工夫</a>
-      <a class="nav-github" href="https://github.com/satou-asuka/animal-crossing-auction">GitHub <span aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
-  <main id="main">
-    <section class="hero section-wrap" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="tiny-leaf" aria-hidden="true">●</span> WEB APPLICATION / CakePHP 3</p>
-        <h1 id="hero-title">島のアイテムを、<br>次のだれかへ。</h1>
-        <p class="hero-subtitle">あつまれ どうぶつの森をモチーフにした<br class="desktop-break">オークションWebアプリ。</p>
-        <p class="hero-description">商品を探すところから、出品・入札、落札後のやり取りまで。画面とデータ、終了バッチを組み合わせたアプリの実装を紹介します。</p>
-        <div class="hero-actions"><a class="button" href="#screens">画面・デモを見る <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/satou-asuka/animal-crossing-auction">ソースコード <span aria-hidden="true">↗</span></a></div>
-        <ul class="tags" aria-label="主な使用技術"><li>PHP</li><li>CakePHP 3.8</li><li>MySQL</li><li>JavaScript</li></ul>
+
+  <div class="site-container">
+
+    <!-- ========================
+         ヘッダー
+    ========================= -->
+    <header class="site-header">
+
+      <div class="site-title">
+        <h1>あつ森オークション | 機能紹介</h1>
+        <p>
+          あつまれ どうぶつの森をモチーフにした
+          オークションWebアプリ
+        </p>
       </div>
-      <div class="journey" aria-label="アプリの取引フロー。実画面ではなく処理の説明図です。">
-        <div class="journey-heading"><span class="leaf" aria-hidden="true"></span><span>小さな取引の、その先まで。<small>アプリの処理フロー</small></span><span class="journey-stamp" aria-hidden="true">ISLAND<br>AUCTION</span></div>
-        <ol class="journey-steps">
-          <li><span class="step-no">01</span><div><strong>見つける・出品する</strong><p>検索 / カテゴリ / 商品画像</p></div><span class="step-mark" aria-hidden="true">⌕</span></li>
-          <li><span class="step-no">02</span><div><strong>入札して、状況を確認</strong><p>入札履歴 / 最高入札者の表示</p></div><span class="step-mark" aria-hidden="true">↗</span></li>
-          <li><span class="step-no">03</span><div><strong>終了バッチで落札を確定</strong><p>最高額の選定 / 通知処理</p></div><span class="step-mark" aria-hidden="true">✓</span></li>
-          <li><span class="step-no">04</span><div><strong>メッセージでやり取り</strong><p>落札情報にひもづく投稿</p></div><span class="step-mark" aria-hidden="true">✉</span></li>
-        </ol>
-        <p class="journey-foot">画面の操作と、時間で進む処理をつなぐ。</p>
+
+      <div class="header-right">
+
+        <div class="tech-tags">
+          <span>PHP</span>
+          <span>CakePHP 3.8</span>
+          <span>MySQL</span>
+          <span>JavaScript</span>
+        </div>
+
+        <a
+          class="github-link"
+          href="https://github.com/satou-asuka/animal-crossing-auction"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ソースコードはこちら ↗
+        </a>
+
       </div>
-    </section>
 
-    <div class="project-strip"><div class="section-wrap strip-inner"><span>PROJECT NOTE</span><p>既存アプリのソースをもとにした紹介サイトです。実行可能なアプリの公開デモではありません。</p></div></div>
+    </header>
 
-    <section class="section-wrap section-space about" aria-labelledby="about-title">
-      <div><p class="eyebrow">01 / ABOUT THE PROJECT</p><h2 id="about-title">親しみやすい世界観で、<br>オークションの流れを形に。</h2></div>
-      <div class="about-copy"><p>制作テーマは、あつまれ どうぶつの森のアイテムを扱うオークション。価格の単位に「ベル」を使い、やわらかな配色や状態表示で世界観を表現しています。</p><p>ユーザー・商品・入札・落札・メッセージのデータを関連づけ、取引の流れをWebアプリとして実装しています。このページでは、その機能と実装の特徴を短時間で把握できるようにまとめました。</p><p class="small-note">制作の個人的な動機・開発期間は未確認のため掲載していません。</p></div>
-    </section>
+    <!-- ========================
+         メインレイアウト
+    ========================= -->
+    <div class="layout">
 
-    <section class="section-wrap section-space" id="features" aria-labelledby="features-title">
-      <div class="section-heading"><div><p class="eyebrow">02 / FEATURES</p><h2 id="features-title">探す。競る。取引を進める。</h2></div><p>ソースコードで確認した、<br>主な機能をピックアップ。</p></div>
-      <div class="feature-grid">
-        <article class="feature-card"><span class="card-number">01 / DISCOVER</span><h3>欲しいアイテムを探す</h3><p>商品名の部分一致検索とカテゴリ絞り込み。新旧・終了日時・最低価格・入札件数による並び替え、10件単位のページ表示に対応。</p><span class="feature-label">検索・並び替え</span></article>
-        <article class="feature-card"><span class="card-number">02 / EXHIBIT</span><h3>画像と一緒に出品する</h3><p>商品名・カテゴリ・画像・最低価格・終了日時を登録。終了日時は日数ボタンから選べて、価格未入力時は300ベルを設定します。</p><span class="feature-label">出品・編集・削除</span></article>
-        <article class="feature-card"><span class="card-number">03 / BID</span><h3>入札の状況をつかむ</h3><p>入札を登録し、商品詳細で履歴を確認。自分の入札一覧では「最高入札者」「上位入札あり」などの状態を表示します。</p><span class="feature-label">入札・状況一覧</span></article>
-        <article class="feature-card"><span class="card-number">04 / KEEP</span><h3>気になる商品を残す</h3><p>一覧の星ボタンからお気に入りを登録・解除。ログインユーザーごとに、気になる商品をまとめて確認できます。</p><span class="feature-label">お気に入り</span></article>
-        <article class="feature-card"><span class="card-number">05 / CLOSE</span><h3>終了した商品を処理する</h3><p>Shellが終了日時を過ぎた商品を抽出。最高額の入札から落札情報を作り、入札がない商品も終了状態へ更新する構成です。</p><span class="feature-label">終了バッチ・メール通知処理</span></article>
-        <article class="feature-card"><span class="card-number">06 / CONNECT</span><h3>落札後のやり取りへ</h3><p>出品・落札一覧からメッセージ画面へ。落札情報にひもづいた投稿履歴の表示・送信と、自分の投稿を削除する処理があります。</p><span class="feature-label">履歴・取引メッセージ</span></article>
-      </div>
-      <p class="section-note">ログインにはCakePHPのフォーム認証を使用。一般利用者向けの新規登録は現在の公開許可設定に含まれません。機能紹介はコード上の確認に基づき、実行・メール配送・Cronの稼働は未検証です。</p>
-    </section>
+      <!-- 左側メニュー -->
+      <aside class="sidebar">
 
-    <section class="screens-section" id="screens" aria-labelledby="screens-title"><div class="section-wrap section-space">
-      <div class="section-heading"><div><p class="eyebrow">03 / SCREEN GALLERY</p><h2 id="screens-title">画面から見る、使い方。</h2></div><span class="status-pill" id="gallery-status">実画面の画像は準備中</span></div>
-      <p class="section-intro">実際のアプリで撮影した画像を掲載するエリアです。現在は画像が未追加のため、画面の役割を紹介しています。</p>
-      <div class="screen-grid">
-        <figure class="screen-card screen-wide"><div class="screen-media" data-image="images/auction-list.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">▤</span><strong>商品一覧・検索</strong><span>実画面の画像を準備中</span></div><img hidden alt="商品一覧画面。商品名検索・カテゴリ・並び替え・お気に入りの操作欄。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 01</span><h3>一覧から、欲しいものへ。</h3><p>検索・カテゴリ・並び替えを1つの画面に。入札件数や終了状態を見ながら商品詳細へ進みます。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-        <figure class="screen-card"><div class="screen-media" data-image="images/item-detail.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">▧</span><strong>商品詳細</strong><span>実画面の画像を準備中</span></div><img hidden alt="商品詳細画面。商品画像・最低価格・終了日時と入札履歴。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 02</span><h3>条件と入札履歴を確認。</h3><p>画像や終了日時を確認して入札へ。終了した商品には落札情報を表示します。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-        <figure class="screen-card"><div class="screen-media" data-image="images/item-create.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">＋</span><strong>出品フォーム</strong><span>実画面の画像を準備中</span></div><img hidden alt="商品出品画面。画像選択・カテゴリ・最低価格・終了日時の入力欄。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 03</span><h3>終了日時を、日数で選ぶ。</h3><p>1・2・3・5・7日後のボタンと、日時の直接指定を用意しています。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-        <figure class="screen-card"><div class="screen-media" data-image="images/bidding.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">↗</span><strong>自分の入札状況</strong><span>実画面の画像を準備中</span></div><img hidden alt="自分の入札一覧画面。最高入札者・上位入札あり・落札結果の状態表示。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 04</span><h3>今の入札状況がわかる。</h3><p>自分の最高入札額と全体の最高額を比較して状態を表示します。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-        <figure class="screen-card"><div class="screen-media" data-image="images/favorites.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">☆</span><strong>お気に入り一覧</strong><span>実画面の画像を準備中</span></div><img hidden alt="お気に入り一覧画面。登録商品の状態と詳細へのリンク。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 05</span><h3>気になる商品をひとまとめ。</h3><p>登録した商品を確認し、星ボタンで解除できます。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-        <figure class="screen-card"><div class="screen-media" data-image="images/my-listings.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">≡</span><strong>自分の出品一覧</strong><span>実画面の画像を準備中</span></div><img hidden alt="自分の出品一覧画面。出品中・落札済み・落札なし終了の表示。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 06</span><h3>出品後の結果を確認。</h3><p>状態・入札件数を確認し、編集や取引メッセージへ進みます。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-        <figure class="screen-card"><div class="screen-media" data-image="images/transaction-messages.png"><div class="media-placeholder"><span class="placeholder-symbol" aria-hidden="true">✉</span><strong>取引メッセージ</strong><span>実画面の画像を準備中</span></div><img hidden alt="取引メッセージ画面。落札商品にひもづく投稿欄と履歴。" loading="lazy" width="1440" height="900"></div><figcaption><span class="card-number">SCREEN 07</span><h3>商品ごとのやり取り。</h3><p>送信者・メッセージ・送信日時を一覧で表示します。</p><a class="screen-expand" hidden>実画面の画像を開く ↗</a></figcaption></figure>
-      </div>
-      <p class="section-note">ここに表示する画像は実画面のキャプチャに限ります。上の枠は画像未追加を示す案内で、アプリ画面の再現ではありません。マイページは記述の不整合があるため、動作確認後の掲載対象としています。</p>
-    </div></section>
+        <h2>画面一覧</h2>
 
-    <section class="section-wrap section-space" id="demo" aria-labelledby="demo-title">
-      <div class="section-heading"><div><p class="eyebrow">04 / WALKTHROUGH</p><h2 id="demo-title">操作の流れを、動画で。</h2></div></div>
-      <div class="demo-layout"><div class="video-area" id="video-area"><div class="video-placeholder" id="video-placeholder"><span class="play-symbol" aria-hidden="true">▷</span><strong>操作デモは準備中です</strong><p>実際のアプリを操作した動画を<br>後から追加する予定です。</p></div><video id="demo-video" hidden controls playsinline preload="metadata" aria-label="島のオークションの操作デモ"></video></div><div class="demo-copy"><p class="card-number">撮影する操作の流れ</p><ol class="demo-steps"><li>商品を検索し、詳細を確認</li><li>画像・価格・終了日時を設定して出品</li><li>別のデモアカウントで入札</li><li>終了バッチ実行後の落札結果を確認</li><li>取引メッセージを送信</li></ol><p class="small-note">このリストは撮影案です。実施済みの操作・検証結果を表すものではありません。</p><noscript><p>動画を追加した後は、JavaScriptを有効にするとこの場所で再生できます。</p></noscript></div></div>
-    </section>
+        <nav aria-label="画面一覧">
 
-    <section class="technology-section" id="technology" aria-labelledby="technology-title"><div class="section-wrap section-space">
-      <div class="section-heading"><div><p class="eyebrow">05 / TECHNOLOGY</p><h2 id="technology-title">画面・データ・バッチの構成。</h2></div><p>既存アプリの構成と、<br>この紹介サイトの構成を分けて紹介。</p></div>
-      <div class="architecture"><p class="diagram-label">既存のCakePHPアプリ / ソースから確認した構成</p><div class="architecture-flow"><div class="architecture-node"><small>CLIENT</small><strong>ブラウザー</strong><span>HTML / CSS / JavaScript</span></div><span class="flow-arrow" aria-label="双方向">↔</span><div class="architecture-node node-main"><small>APPLICATION</small><strong>CakePHP 3.8</strong><span>Controller / ORM / Template</span></div><span class="flow-arrow" aria-label="双方向">↔</span><div class="architecture-node"><small>DATABASE</small><strong>MySQL</strong><span>ユーザー・商品・取引情報</span></div></div><div class="batch-flow"><span>終了日時を確認する <strong>AuctionShell</strong></span><span aria-hidden="true">→</span><span>ORMで落札情報を保存</span><span aria-hidden="true">→</span><span>Cake Mailerで通知</span></div><p class="small-note">定期実行用のShellを実装。Cronの登録内容・実行間隔およびメール配送は未確認です。</p></div>
-      <div class="tech-grid"><div><h3>技術とバージョン</h3><div class="table-scroll" tabindex="0" role="region" aria-label="技術とバージョンの表"><table><thead><tr><th scope="col">技術</th><th scope="col">確認内容</th></tr></thead><tbody><tr><th scope="row">PHP</th><td>composer.json の要件：≥ 5.6<br><small>実行環境のバージョンは未確認</small></td></tr><tr><th scope="row">CakePHP</th><td>3.8.13 <small>（指定：3.8.*）</small></td></tr><tr><th scope="row">Migrations</th><td>2.4.2</td></tr><tr><th scope="row">MySQL</th><td>ドライバー設定あり / バージョン不明</td></tr><tr><th scope="row">開発依存</th><td>Bake 1.12.0 / DebugKit 3.23.0<br>PHPUnit 6.5.14</td></tr></tbody></table></div><p class="small-note">ライブラリの数値はcomposer.lockの記録です。開発依存にはPHP 7以上等の要件があり、PHP 5.6で全構成が動作することを示しません。</p></div><div class="data-model"><h3>取引を支える6つのテーブル</h3><dl><div><dt>users</dt><dd>アカウント・権限</dd></div><div><dt>biditems</dt><dd>出品商品・画像・最低価格・終了日時</dd></div><div><dt>bidrequests</dt><dd>商品に対する入札者・金額</dd></div><div><dt>bidinfo</dt><dd>商品の落札者・落札価格</dd></div><div><dt>bidmessages</dt><dd>落札情報にひもづくメッセージ</dd></div><div><dt>favorites</dt><dd>ユーザーと商品の組み合わせ</dd></div></dl><p class="small-note">ORMの関連：ユーザー→出品・入札・落札・お気に入り、商品→入札・落札、落札→メッセージ。DB側の制約とは区別しています。</p></div></div>
-      <div class="static-site-note"><span class="static-badge">THIS WEBSITE</span><div><h3>この紹介サイトは静的サイトです。</h3><p>HTML・CSS・JavaScriptのみ。GitHub Pages向けの構成で、PHP・MySQLや追加フレームワークを使わずに閲覧できます。</p></div></div>
-    </div></section>
+          <button class="menu-item"
+                  data-screen="login">
+            ログイン
+          </button>
 
-    <section class="section-wrap section-space" id="engineering" aria-labelledby="engineering-title">
-      <div class="section-heading"><div><p class="eyebrow">06 / ENGINEERING NOTES</p><h2 id="engineering-title">コードで伝えたい、実装の工夫。</h2></div></div>
-      <div class="engineering-list">
-        <article><span class="engineering-no">01</span><div><h3>検索に入札件数の集計を組み合わせる</h3><p>商品一覧では入札情報をLEFT JOINし、商品ごとにCOUNT。キーワード・カテゴリの条件と組み合わせ、入札のない商品も含めて取得する構成です。</p><a class="source-link" href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/src/Controller/AuctionController.php#L36">AuctionController::index() ↗</a></div></article>
-        <article><span class="engineering-no">02</span><div><h3>複数の情報から、利用者に必要な状態を作る</h3><p>自分の最高入札額、全体の最高額、商品終了状態、落札者を組み合わせて表示を切り替えます。出品側にも「落札なしで終了」を含む状態ラベルを用意しています。</p><a class="source-link" href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/src/Controller/AuctionController.php#L562">AuctionController::bidding() ↗</a></div></article>
-        <article><span class="engineering-no">03</span><div><h3>閲覧操作から独立した、終了処理の入口</h3><p>終了日時を過ぎた商品を処理するコードをShellにまとめています。ページを開く操作に依存せず、コマンドから落札情報の作成・終了状態の更新・通知を行う設計です。</p><a class="source-link" href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/src/Shell/AuctionShell.php">AuctionShell::main() ↗</a></div></article>
-        <article><span class="engineering-no">04</span><div><h3>フレームワークの機能を、用途に合わせて使う</h3><p>ORMで関連データを取得し、ユーザー名の重複や入力形式を検証。パスワードはEntityのセッターでハッシュ化し、プロフィール更新では変更可能な項目を限定しています。</p><a class="source-link" href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/src/Model/Entity/User.php">User Entity / パスワードの保存処理 ↗</a></div></article>
-        <article><span class="engineering-no">05</span><div><h3>入力の手間と、世界観の両方を考える</h3><p>出品時の終了日時プリセットと選択ファイル名表示、状態ごとのバッジを実装。BGMの再生設定と位置をlocalStorageに保存する処理もあります。</p><a class="source-link" href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/src/Template/Auction/add.ctp">出品フォームのテンプレート ↗</a></div></article>
-      </div>
-      <details class="verification-notes"><summary>調査範囲と、動作確認が必要な点</summary><div><p>掲載内容はソースコードの静的調査に基づきます。この環境ではアプリを起動していません。</p><ul><li>入札の最低価格・終了日時のサーバー側検証、取引参加者のアクセス制御、CSRF設定には確認・改善が必要です。</li><li>所有者確認処理には例外クラスの名前空間の不整合があります。</li><li>終了バッチの排他制御・処理全体のトランザクション・メール失敗時の復旧は確認できません。</li><li>マイページのヘルパー呼び出しに誤記があり、プロフィール追加項目のMigrationも見当たりません。</li><li>関連テストには未実装の雛形があります。品質保証・性能向上の実績は掲載していません。</li></ul><a href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/docs/SOURCE_REVIEW.md">根拠と未確認事項を詳しく読む ↗</a></div></details>
-    </section>
+          <button class="menu-item active"
+                  data-screen="index">
+            商品一覧
+          </button>
 
-    <section class="process-section"><div class="section-wrap section-space process-layout"><div><p class="eyebrow">07 / DEVELOPMENT PROCESS</p><h2>アプリ開発と、<br>紹介サイト制作を分けて記録。</h2><p>今回の紹介サイト制作ではCodexを活用しています。コード調査から構成・静的サイトの作成まで、使用したプロンプトと制約、確認状況を記録しています。</p><a class="text-link" href="https://github.com/satou-asuka/animal-crossing-auction/blob/main/docs/AI_DEVELOPMENT.md">AI活用記録を読む <span aria-hidden="true">↗</span></a></div><div class="process-card"><div><span>EXISTING APPLICATION</span><h3>CakePHP製オークションアプリ</h3><p>今回の作業では、既存ソースを調査対象として参照。アプリのコードは変更しません。</p></div><div><span>THIS PORTFOLIO</span><h3>Codexを使った紹介サイト制作</h3><p>調査に基づく文章とデザインを作成。構成案は制作者が承認し、画面撮影・掲載内容の最終確認は今後の確認事項として記録します。</p></div></div></div></section>
-    <section class="section-wrap repository-section" aria-labelledby="repository-title"><span class="leaf" aria-hidden="true"></span><p class="eyebrow">READ THE SOURCE</p><h2 id="repository-title">実装の続きは、GitHubで。</h2><p>コントローラー・モデル・テンプレート・Migrationから、<br>アプリを構成するコードをご覧いただけます。</p><a class="button" href="https://github.com/satou-asuka/animal-crossing-auction">GitHubリポジトリを見る <span aria-hidden="true">↗</span></a></section>
-  </main>
-  <footer class="site-footer"><div class="section-wrap footer-inner"><span>島のオークション <small>— Development Portfolio</small></span><p>「あつまれ どうぶつの森」をモチーフにした非公式の個人制作作品紹介です。任天堂とは関係ありません。</p><a href="#top">ページの先頭へ ↑</a></div></footer>
+          <button class="menu-item"
+                  data-screen="detail">
+            商品詳細
+          </button>
+
+          <button class="menu-item"
+                  data-screen="add">
+            商品出品
+          </button>
+
+          <button class="menu-item"
+                  data-screen="edit">
+            商品編集
+          </button>
+
+          <button class="menu-item"
+                  data-screen="bid">
+            入札
+          </button>
+
+          <button class="menu-item"
+                  data-screen="bidding">
+            入札中の商品一覧
+          </button>
+
+          <button class="menu-item"
+                  data-screen="home">
+            落札した商品一覧
+          </button>
+
+          <button class="menu-item"
+                  data-screen="msg">
+            取引メッセージ
+          </button>
+
+          <button class="menu-item"
+                  data-screen="favorites">
+            お気に入り一覧
+          </button>
+
+          <button class="menu-item"
+                  data-screen="mypage">
+            マイページ
+          </button>
+
+        </nav>
+
+      </aside>
+      <!-- 右側コンテンツ -->
+      <main class="main-content">
+
+        <!-- ====================
+            ログイン
+        ===================== -->
+        <section class="screen" id="screen-login">
+
+          <h2>ログイン</h2>
+
+          <p class="screen-description">
+            登録済みのユーザー名とパスワードを入力し、
+            アカウント認証を行う画面です。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/login.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>ユーザー名・パスワードの入力</li>
+              <li>入力したアカウント情報によるログイン認証</li>
+              <li>認証エラー時のメッセージ表示</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>パスワードのハッシュ化による安全な管理</strong>
+                <p>
+                  CakePHPのDefaultPasswordHasherを使用し、
+                  パスワードを平文ではなくハッシュ化して
+                  データベースに保存しています。
+                  ログイン時には入力されたパスワードと
+                  保存済みのハッシュ値を照合することで、
+                  パスワードを直接保存せずに
+                  ユーザー認証を行えるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>認証エラー時のメッセージ表示</strong>
+                <p>
+                  CakePHPのFlash機能を使用し、
+                  ログイン認証に失敗した際の
+                  エラーメッセージを表示できるようにしています。
+                  ログインできなかった場合にも、
+                  利用者が状況を把握できるようにしました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+        <!-- ====================
+             商品一覧
+        ===================== -->
+        <section class="screen active"
+                 id="screen-index">
+
+          <h2>商品一覧（トップページ）画面</h2>
+
+          <p class="screen-description">
+            出品された商品を検索・絞り込み・
+            並び替えて確認できる画面です。
+            トップページのため、この画面から各画面に遷移できます。
+          </p>
+
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/index.mp4"
+                      type="video/mp4">
+              動画を再生できません。
+            </video>
+          </div>
+
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>商品一覧の表示（10件ずつ）</li>
+              <li>商品名の部分一致検索</li>
+              <li>カテゴリによる絞り込み</li>
+              <li>新着順・終了日時・価格・入札件数での並び替え</li>
+              <li>お気に入り登録・解除</li>
+            </ul>
+          </section>
+
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                1. 検索・絞り込み条件の組み合わせ
+                GETパラメータからキーワードとカテゴリを取得し、CakePHPのORMで条件を動的に追加。
+                複数の条件を組み合わせた商品検索を実現しています。
+              </li>
+              <li>
+                2. 入札件数を利用した並び替え
+                leftJoinWith() で商品と入札情報を結合し、COUNT() と GROUP BY で商品ごとの入札件数を集計。
+                集計結果を利用した並び替えに対応しています。
+              </li>
+              <li>
+                3. ユーザーごとのお気に入り管理
+                FavoritesテーブルでユーザーIDと商品IDを関連付け、お気に入り登録済みかどうかを判定。
+                星のマークを押す同じ操作で登録・解除を切り替えられる仕組みにしています。
+              </li>
+            </ul>
+
+          </section>
+
+        </section>
+
+        <!-- ====================
+             商品詳細画面
+        ===================== -->
+        <section class="screen" id="screen-detail">
+
+          <h2>商品詳細画面</h2>
+
+          <p class="screen-description">
+            商品の詳細情報や入札履歴を確認する画面です。
+          </p>
+
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/detail.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <section class="info-section">
+            <h3>主な機能</h3>
+            <ul>
+              <li>商品画像・出品者・カテゴリ・最低価格などの詳細表示</li>
+              <li>入札履歴の表示（金額・入札者・入札日時</li>
+              <li>落札者・落札金額などの結果表示</li>
+              <li>開催中のオークションへの入札画面への遷移</li>
+            </ul>
+          </section>
+
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+            <ul>
+              <li>
+                <strong>オークションの状態に応じた表示制御</strong>
+                <p>
+                  オークションの終了状態とログインユーザーを判定し、
+                  入札可能な場合のみ入札ボタンを表示しています。
+                  出品者本人や終了済みの商品ではボタンを非表示にし、
+                  誤操作を防ぐよう工夫しました。
+                </p>
+              </li>
+
+              <li>
+                <strong>データの有無に応じた表示の切り替え</strong>
+                <p>
+                  商品画像・入札履歴・落札情報の有無を判定し、
+                  データが存在しない場合は「画像なし」「入札は、まだありません」などの案内を表示しています。
+                  データが未登録の状態でも、
+                  利用者が状況を把握できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>日時の表示形式の統一</strong>
+                <p>
+                  出品日時・終了日時・入札日時を
+                  「月日（曜日）時刻」の形式に整形しています。
+                  曜日を日本語に変換することで、
+                  オークションの日時を直感的に確認できるようにしました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+        <!-- ====================
+             商品の出品
+        ===================== -->
+        <section class="screen" id="screen-add">
+
+          <h2>商品出品画面</h2>
+
+          <p class="screen-description">
+            商品名・カテゴリ・最低価格・終了日時などを設定し、オークションに商品を出品できる画面です。
+          </p>
+
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/add.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <section class="info-section">
+            <h3>主な機能</h3>
+            <ul>
+              <li>商品名・カテゴリ・最低価格の入力</li>
+              <li>商品画像のアップロード（任意）</li>
+              <li>最低価格の自動設定（未入力時は300ベル）</li>
+              <li>終了日時の設定（指定日数から選択・手動入力）</li>
+              <li>ログインユーザーを出品者として自動設定</li>
+              <li>入力した商品情報の登録</li>
+            </ul>
+          </section>
+
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+              <ul>
+              <li>
+                <strong>終了日時を簡単に設定できるUI</strong>
+                <p>
+                  JavaScriptを使用し、現在日時から1日後・2日後・3日後・
+                  5日後・7日後の終了日時を自動設定できるようにしました。
+                  また、HTML5を利用したカレンダー形式の
+                  日時入力にも対応し、利用者が希望する日時を
+                  直感的に設定できるよう工夫しました。
+                </p>
+              </li>
+
+              <li>
+                <strong>タイムスタンプを利用した画像ファイル名の管理</strong>
+                <p>
+                  画像アップロード時に、タイムスタンプを
+                  元のファイル名の先頭に付与して保存しています。
+                  これにより、同じファイル名の画像でも
+                  別々のファイルとして保存でき、
+                  同じ画像を複数の商品に使用できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>未入力時の初期値設定</strong>
+                <p>
+                  最低価格が未入力の場合は300ベルを自動設定し、
+                  画像が選択されていない場合でも
+                  出品できるようにしています。
+                  任意項目を入力しなくても登録できる設計にしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>入力内容に応じた画面表示の切り替え</strong>
+                <p>
+                  JavaScriptを使用して、
+                  画像選択時にはファイル名を表示し、
+                  終了日時の設定方法に応じて
+                  入力欄の表示を切り替えています。
+                  必要な情報だけを表示することで、
+                  操作しやすいフォームにしています。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+        
+        <!-- ====================
+             商品編集
+        ===================== -->
+        <section class="screen" id="screen-edit">
+
+          <h2>商品編集</h2>
+
+          <p class="screen-description">
+            出品済み商品の商品名・カテゴリ・最低価格・商品画像を
+            変更できる画面です。
+            商品情報の更新に加えて、出品した商品の削除もできます。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/edit.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>登録済みの商品名・カテゴリ・最低価格の編集</li>
+              <li>商品画像の変更・アップロード</li>
+              <li>登録済みの画像ファイル名と新しく選択したファイル名の表示</li>
+              <li>ログインユーザーの出品者名の表示</li>
+              <li>編集した商品情報の更新</li>
+              <li>確認ダイアログを伴う商品の削除</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>登録済みデータを利用した編集フォーム</strong>
+                <p>
+                  CakePHPのFormHelperを利用し、
+                  登録済みの商品情報を入力欄に表示しています。
+                  変更したい項目だけを編集できるため、
+                  商品情報を入力し直す手間を減らしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>画像ファイル名の表示処理</strong>
+                <p>
+                  保存時に付与したタイムスタンプを
+                  正規表現で取り除き、
+                  元の画像ファイル名を表示しています。
+                  また、JavaScriptを使用して、
+                  新しく画像を選択した際には
+                  ファイル名が切り替わるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>商品削除時の誤操作防止</strong>
+                <p>
+                  商品を削除する際には、
+                  確認ダイアログを表示しています。
+                  削除前に利用者の意思を確認することで、
+                  誤操作による商品削除を防ぐよう工夫しました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+
+        <!-- ====================
+             入札
+        ===================== -->
+        <section class="screen" id="screen-bid">
+
+          <h2>入札画面</h2>
+
+          <p class="screen-description">
+            商品の入札金額を入力し、オークションに参加できる画面です。
+          </p>
+
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/bid.mp4" type="video/mp4">
+            </video>
+          </div>
+
+        <!-- 主な機能 -->
+        <section class="info-section">
+          <h3>主な機能</h3>
+
+          <ul>
+            <li>商品名・最低入札価格の表示</li>
+            <li>最低入札価格以上の金額入力（10ベル刻み）</li>
+            <li>入力した金額での入札</li>
+          </ul>
+        </section>
+
+        <!-- 実装上の工夫 -->
+        <section class="info-section">
+          <h3>実装上の工夫</h3>
+
+          <ul>
+            <li>
+              <strong>最低入札価格に応じた入力制御</strong>
+              <p>
+                商品ごとに設定された最低価格を取得し、
+                入札金額の初期値と入力可能な最小値に設定しています。
+                また、10ベル刻みで入力できるようにし、
+                入札条件を満たす金額を入力しやすくしました。
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ====================
+             入札中の商品一覧
+        ===================== -->
+        <section class="screen" id="screen-bidding">
+
+          <h2>入札中の商品一覧</h2>
+
+          <p class="screen-description">
+            自分が入札した商品を一覧表示し、
+            現在の入札状況やオークションの結果を
+            確認できる画面です。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/bidding.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>自分が入札した商品の一覧表示</li>
+              <li>入札した商品数の表示</li>
+              <li>入札状況の確認（最高入札者・上位入札あり・落札済み・落札失敗）</li>
+              <li>各商品のオークション終了日時の表示</li>
+              <li>商品詳細画面への遷移</li>
+              <li>落札した商品一覧への遷移</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>入札状況に応じたステータス表示</strong>
+                <p>
+                  自分が最高入札者かどうかや、
+                  オークションの終了結果に応じて、
+                  「最高入札者」「上位入札あり」「落札済み」
+                  「落札できませんでした」の4種類の
+                  ステータスを表示しています。
+                  また、ステータスごとに色やアイコンを変えることで、
+                  現在の状況をひと目で把握できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>入札結果をまとめて確認できる画面設計</strong>
+                <p>
+                  開催中の商品だけでなく、
+                  落札済み・落札できなかった商品も一覧に表示しています。
+                  過去に参加したオークションの結果も同じ画面で確認できるようにしました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+        
+        <!-- ====================
+            落札した商品一覧
+        ===================== -->
+        <section class="screen" id="screen-home">
+
+          <h2>落札した商品一覧</h2>
+
+          <p class="screen-description">
+            自分が落札した商品を一覧で確認できる画面です。
+            落札日時の確認や、出品者との取引メッセージ画面への
+            移動ができます。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/home.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>ログインユーザーが落札した商品の一覧表示</li>
+              <li>落札した商品数・商品名・落札日時の表示</li>
+              <li>商品ID・商品名・落札日時による並び替え</li>
+              <li>商品名・メッセージボタンから取引メッセージ画面への遷移</li>
+              <li>出品した商品一覧画面への遷移</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>ログインユーザーに応じた落札商品の表示</strong>
+                <p>
+                  ログイン中のユーザーが落札した商品を取得し、
+                  自分の落札履歴だけを一覧表示しています。
+                  落札した商品と取引情報をまとめて
+                  確認できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>取引メッセージ機能との連携</strong>
+                <p>
+                  落札情報のIDを利用して、
+                  該当する取引メッセージ画面へ移動できるようにしています。
+                  商品名と「メッセージを見る」ボタンの両方から
+                  アクセスでき、落札後のやり取りを
+                  始めやすい画面構成にしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>並び替え・ページネーションの実装</strong>
+                <p>
+                  CakePHPのPaginatorを利用し、
+                  商品ID・商品名・落札日時による並び替えと
+                  ページ単位での一覧表示に対応しています。
+                  落札した商品が増えても、
+                  目的の取引を探しやすいようにしました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+        
+        <!-- ====================
+            取引メッセージ
+        ===================== -->
+        <section class="screen" id="screen-msg">
+
+          <h2>取引メッセージ</h2>
+
+          <p class="screen-description">
+            落札した商品について、出品者と落札者が
+            メッセージを送受信できる画面です。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/msg.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>落札した商品に関するメッセージの送信</li>
+              <li>送信者名・メッセージ内容・送信日時の一覧表示</li>
+              <li>自分が送信したメッセージの削除</li>
+              <li>メッセージが存在しない場合の案内表示</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>落札情報に紐づくメッセージ管理</strong>
+                <p>
+                  落札情報のIDを使用して、
+                  商品ごとの取引メッセージを管理しています。
+                  これにより、各取引に関するやり取りを
+                  それぞれの画面で確認できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>送信者に応じた削除ボタンの表示制御</strong>
+                <p>
+                  メッセージの送信者IDとログインユーザーのIDを比較し、
+                  自分が送信したメッセージにのみ
+                  削除ボタンを表示しています。
+                  また、削除前に確認ダイアログを表示することで、
+                  誤操作を防ぐよう工夫しました。
+                </p>
+              </li>
+
+              <li>
+                <strong>メッセージの安全な表示</strong>
+                <p>
+                  CakePHPのh()関数を使用して、
+                  ユーザー名やメッセージ内容を
+                  HTMLエスケープして表示しています。
+                  入力されたHTMLやスクリプトが
+                  そのまま実行されないようにしています。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+
+
+        
+        <!-- ====================
+                    お気に入り一覧
+        ===================== -->
+        <section class="screen" id="screen-favorites">
+
+          <h2>お気に入り一覧</h2>
+
+          <p class="screen-description">
+            お気に入りに登録した商品を一覧で確認できる画面です。
+            商品の出品状況や終了日時を確認できるほか、
+            商品詳細画面への移動やお気に入りの解除ができます。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/favorites.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>ログインユーザーがお気に入り登録した商品の一覧表示</li>
+              <li>商品名・出品状況・オークション終了日時の表示</li>
+              <li>お気に入り登録の解除</li>
+              <li>商品名・詳細ボタンから商品詳細画面への遷移</li>
+              <li>お気に入り商品が存在しない場合の案内表示</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>ユーザーと商品を紐づけたお気に入り管理</strong>
+                <p>
+                  お気に入り情報をユーザーと商品に紐づけて管理し、
+                  ログインユーザーが登録した商品だけを一覧表示しています。
+                  商品情報を関連付けて取得することで、
+                  お気に入り一覧から商品の状態や終了日時も
+                  確認できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>お気に入り登録状態に応じた表示制御</strong>
+                <p>
+                  お気に入り登録済みの商品には、
+                  登録状態を表す黄色い星のボタンを表示しています。
+                  ボタンからお気に入りの解除処理を呼び出せるようにし、
+                  商品一覧画面と共通の操作で
+                  お気に入りを管理できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>オークションの状態に応じた表示の切り替え</strong>
+                <p>
+                  商品の終了状態を表すfinishedの値を判定し、
+                  出品中の商品には「🍃 出品中」、
+                  終了した商品には「🌸 終了」と表示しています。
+                  お気に入りに登録した商品の現在の状態を、
+                  一覧画面からひと目で確認できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>データの有無に応じた画面表示</strong>
+                <p>
+                  お気に入り情報が存在する場合は商品一覧を表示し、
+                  登録商品がない場合は案内メッセージに切り替えています。
+                  データが0件の場合でも、
+                  画面の状態が分かりやすくなるようにしました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+        
+        <!-- ====================
+            マイページ
+        ===================== -->
+        <section class="screen" id="screen-mypage">
+
+          <h2>マイページ</h2>
+
+          <p class="screen-description">
+            ログインユーザーの登録情報を確認・編集できる画面です。
+          </p>
+
+          <!-- 操作動画 -->
+          <div class="video-container">
+            <video controls preload="metadata">
+              <source src="videos/mypage.mp4" type="video/mp4">
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
+
+          <!-- 主な機能 -->
+          <section class="info-section">
+            <h3>主な機能</h3>
+
+            <ul>
+              <li>ユーザーID・登録情報の表示</li>
+              <li>ユーザー名・メールアドレス・電話番号・住所の編集・保存</li>
+              <li>管理者ユーザーへの権限情報の表示</li>
+              <li>自分の落札情報・出品情報への遷移</li>
+              <li>確認ダイアログを伴うログアウト</li>
+            </ul>
+          </section>
+
+          <!-- 実装上の工夫 -->
+          <section class="info-section">
+            <h3>実装上の工夫</h3>
+
+            <ul>
+              <li>
+                <strong>JavaScriptによる編集モードの切り替え</strong>
+                <p>
+                  初期状態では入力欄を編集不可にし、
+                  「編集」ボタンを押すとJavaScriptによって
+                  各入力欄を編集可能な状態に切り替えています。
+                  同時に「保存」ボタンを有効化し、
+                  「編集」ボタンを無効化することで、
+                  閲覧時と編集中の操作を区別できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>編集開始時のフォーカス制御</strong>
+                <p>
+                  「編集」ボタンを押した際に、
+                  JavaScriptのfocus()を使用して
+                  ユーザー名の入力欄へ自動的にフォーカスを移動しています。
+                  編集開始後、すぐに入力できるようにしました。
+                </p>
+              </li>
+
+              <li>
+                <strong>ユーザー権限に応じた表示制御</strong>
+                <p>
+                  ログインユーザーのroleを判定し、
+                  admin権限を持つユーザーにのみ
+                  権限情報を表示しています。
+                  ユーザーの権限に応じて、
+                  画面に表示する情報を切り替えるようにしました。
+                </p>
+              </li>
+
+              <li>
+              <strong>バリデーションによる入力内容のチェック</strong>
+              <p>
+                CakePHPのValidatorを使用し、
+                ユーザー名の必須入力・100文字以内の文字数制限、
+                メールアドレスの形式、
+                電話番号の半角数字・ハイフンによる入力形式を
+                チェックしています。
+                また、RulesCheckerを使用して
+                ユーザー名の重複登録を防止しています。
+                入力内容に問題がある場合はエラーメッセージを設定し、
+                不正なデータが登録されないようにしました。
+              </p>
+            </li>
+
+              <li>
+                <strong>ログアウト時の確認処理</strong>
+                <p>
+                  CakePHPのHtmlHelperを使用して
+                  ログアウト画面へのリンクを作成し、
+                  実行前に確認ダイアログを表示しています。
+                  意図しないログアウトを防げるようにしました。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+        </section>
+
+
+      </main>
+
+    </div>
+
+  </div>
+
 </body>
 </html>

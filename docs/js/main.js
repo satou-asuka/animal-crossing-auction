@@ -1,64 +1,64 @@
-"use strict";
 
-// Only genuine captures supplied at these paths replace the preparation notices.
-let loadedScreens = 0;
-const screenSlots = document.querySelectorAll("[data-image]");
-const galleryStatus = document.getElementById("gallery-status");
-const galleryIntro = document.querySelector("#screens .section-intro");
+document.addEventListener("DOMContentLoaded", () => {
 
-screenSlots.forEach((slot) => {
-  const image = slot.querySelector("img");
-  const placeholder = slot.querySelector(".media-placeholder");
-  const link = slot.closest("figure").querySelector(".screen-expand");
-  const path = slot.dataset.image;
+  // 左側のメニューボタンをすべて取得
+  const menuItems = document.querySelectorAll(".menu-item");
 
-  image.addEventListener("load", () => {
-    if (!image.naturalWidth) return;
-    image.hidden = false;
-    placeholder.hidden = true;
-    link.href = path;
-    link.hidden = false;
-    loadedScreens += 1;
-    galleryStatus.textContent = `実画面 ${loadedScreens} / ${screenSlots.length} 枚`;
-    galleryIntro.textContent = loadedScreens === screenSlots.length
-      ? "実際のアプリで撮影した画面です。画像下のリンクから元の画像をご覧いただけます。"
-      : "追加済みの実画面と、これから掲載する画面の役割を紹介しています。未追加の画像は準備中と表示しています。";
-  }, { once: true });
-  image.addEventListener("error", () => {
-    // Missing media is expected until actual captures are added.
-    image.hidden = true;
-    image.removeAttribute("src");
-  }, { once: true });
-  // Hidden lazy images may never start loading; load eagerly before revealing.
-  image.loading = "eager";
-  image.src = path;
+  // 右側の画面をすべて取得
+  const screens = document.querySelectorAll(".screen");
+
+  // メニューボタンをクリックしたときの処理
+  menuItems.forEach((menuItem) => {
+
+    menuItem.addEventListener("click", () => {
+
+      // クリックされたメニューの画面IDを取得
+      const screenId = menuItem.dataset.screen;
+
+      // 表示対象の画面を取得
+      const targetScreen = document.getElementById(
+        `screen-${screenId}`
+      );
+
+      // 対象画面が存在しない場合は何もしない
+      if (!targetScreen) {
+        return;
+      }
+
+      // すべてのメニューからactiveを削除
+      menuItems.forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      // クリックしたメニューにactiveを追加
+      menuItem.classList.add("active");
+
+      // すべての画面を非表示にする
+      screens.forEach((screen) => {
+
+        screen.classList.remove("active");
+
+        // 非表示にする画面の動画を停止
+        const videos = screen.querySelectorAll("video");
+
+        videos.forEach((video) => {
+          video.pause();
+        });
+
+      });
+
+      // 選択した画面を表示
+      targetScreen.classList.add("active");
+
+      // 右側コンテンツのスクロール位置を先頭に戻す
+      const mainContent = document.querySelector(".main-content");
+
+      if (mainContent) {
+        mainContent.scrollTop = 0;
+      }
+
+    });
+
+  });
+
 });
-
-const video = document.getElementById("demo-video");
-const videoPlaceholder = document.getElementById("video-placeholder");
-
-// Leave the notice visible until the browser can read a real video.
-video.addEventListener("loadedmetadata", () => {
-  video.hidden = false;
-  videoPlaceholder.hidden = true;
-}, { once: true });
-video.addEventListener("error", () => {
-  video.hidden = true;
-  videoPlaceholder.hidden = false;
-  video.removeAttribute("src");
-}, { once: true });
-video.src = "videos/auction-demo.mp4";
-
-// Captions are optional. Check first so an absent file is not shown as a track.
-fetch("videos/auction-demo.vtt", { method: "HEAD" })
-  .then((response) => {
-    if (!response.ok) return;
-    const track = document.createElement("track");
-    track.kind = "captions";
-    track.label = "日本語";
-    track.srclang = "ja";
-    track.src = "videos/auction-demo.vtt";
-    track.default = true;
-    video.appendChild(track);
-  })
-  .catch(() => { /* Preparation notices also work when opened as a local file. */ });
