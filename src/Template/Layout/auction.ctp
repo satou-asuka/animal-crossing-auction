@@ -96,6 +96,17 @@ if($controller === 'Auction' &&
         class="auction-sidebar"
         style="display: none;"
     >
+        <style>
+            .auction-sidebar .side-nav li {
+                margin-bottom: 0;
+            }
+
+            .auction-sidebar .side-nav li a {
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+        </style>
+
         <ul class="side-nav">
 
             <li class="heading">
