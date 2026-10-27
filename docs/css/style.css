@@ -517,3 +517,37 @@ a {
   }
 
 }
+
+
+/* ========================================
+   サイドバーの余白調整
+======================================== */
+
+/* 各グループの見出し */
+.sidebar > h2 {
+  margin: 36px 0 14px;
+  padding-left: 12px;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--primary-dark);
+}
+
+/* 最初の「画面一覧」は上の余白をなくす */
+.sidebar > h2:first-child {
+  margin-top: 0;
+}
+
+/* 各ページの間隔を狭くする */
+.sidebar nav {
+  gap: 2px;
+}
+
+/* メニュー項目の高さを抑える */
+.sidebar .menu-item {
+  padding: 9px 16px;
+  margin: 0;
+  line-height: 1.5;
+}
+

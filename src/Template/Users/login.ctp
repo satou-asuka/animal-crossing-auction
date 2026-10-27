@@ -1,11 +1,42 @@
-<div class="users form">
-<?= $this->Flash->render('auth') ?>
-<?= $this->Form->create() ?>
-    <fieldset>
-        <legend>アカウント名とパスワードを入力して下さい。</legend>
-        <?= $this->Form->input('username') ?>
-        <?= $this->Form->input('password') ?>
-    </fieldset>
-<?= $this->Form->button(__('Login')); ?>
-<?= $this->Form->end() ?>
+<?= $this->Html->css('login.css', ['block' => true]) ?>
+
+<div class="login-page">
+    <div class="login-card">
+
+        <div class="login-header">
+            <h1>📦 あつ森オークション</h1>
+            <p>LOGIN</p>
+        </div>
+
+        <?= $this->Flash->render('auth') ?>
+
+        <?= $this->Form->create(null, [
+            'class' => 'login-form'
+        ]) ?>
+
+        <div class="login-field">
+            <label for="username">ユーザー名</label>
+            <?= $this->Form->input('username', [
+                'label' => false,
+                'placeholder' => 'ユーザー名を入力',
+                'required' => true
+            ]) ?>
+        </div>
+
+        <div class="login-field">
+            <label for="password">パスワード</label>
+            <?= $this->Form->input('password', [
+                'label' => false,
+                'placeholder' => 'パスワードを入力',
+                'required' => true
+            ]) ?>
+        </div>
+
+        <?= $this->Form->button(__('Login'), [
+            'class' => 'login-button'
+        ]) ?>
+
+        <?= $this->Form->end() ?>
+
+    </div>
 </div>

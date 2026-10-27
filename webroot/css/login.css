@@ -1,0 +1,176 @@
+
+/* ========================================
+   ログイン画面
+======================================== */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background: #F8F7F2;
+    font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+    padding: 48px 40px;
+    background: #FFFDF9;
+    border: 1px solid #E1E5DC;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(52, 79, 64, 0.06);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.login-header h1 {
+    margin: 0;
+    color: #344F40;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+}
+
+.login-header p {
+    margin: 8px 0 0;
+    color: #718C76;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.login-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #344F40;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.login-field input {
+    display: block;
+    width: 100%;
+    height: 46px;
+    padding: 10px 14px;
+    border: 1px solid #DCE7D7;
+    border-radius: 8px;
+    background: #F6F7F2;
+    color: #293B32;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-field input:focus {
+    border-color: #718C76;
+    box-shadow: 0 0 0 3px rgba(113, 140, 118, 0.15);
+}
+
+.login-field input::placeholder {
+    color: #929D94;
+}
+
+.login-button {
+    width: 100%;
+    height: 46px;
+    margin-top: 8px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 8px;
+    background: #718C76;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-button:hover {
+    background: #5E7863;
+}
+
+.login-button:focus-visible {
+    outline: 3px solid #B5D0B6;
+    outline-offset: 3px;
+}
+
+@media (max-width: 500px) {
+    .login-card {
+        padding: 36px 24px;
+    }
+
+    .login-header h1 {
+        font-size: 25px;
+    }
+}
+
+
+/* CakePHP FormHelperの入力欄 */
+.login-field .input {
+    margin: 0;
+}
+
+.login-field input {
+    width: 100%;
+}
+
+/* ページ全体の余白を調整 */
+body {
+    margin: 0;
+}
+
+
+/* ログイン画面を画面内に収める */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+.login-page {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* カードが画面からはみ出さないようにする */
+.login-card {
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+@media (max-height: 650px) {
+    .login-card {
+        padding: 24px 32px;
+    }
+
+    .login-header {
+        margin-bottom: 20px;
+    }
+
+    .login-form {
+        gap: 14px;
+    }
+}
